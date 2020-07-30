@@ -228,7 +228,7 @@ describe("repeat", function() {
     const array = [];
 
     repeat(collect(fromTo(0,4), array));
-
+    
     expect(array).toEqual([0,1,2,3]);
   });
 })
