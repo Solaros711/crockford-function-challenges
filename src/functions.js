@@ -249,6 +249,52 @@ exp = (array) => {
     return val
 }
 
-addg = () => {
+addg = (arg1) => {
+    var funcFirst = function doMath(param){
+        if(param === undefined){
+            return arg1
+        }
+        arg1 += param
+        return funcFirst
+    }
+    if(arg1 != undefined){
+        return funcFirst
+    }
+}
 
+liftg = (func) => {
+    var funcFirst = function doMath(param1){
+        if(param1 === undefined){
+            return param1
+        }
+        var funcSecond = function doMoreMath(param2){
+            if(param2 === undefined){
+                return param1
+            }
+            param1 = func(param1, param2)
+            return funcSecond
+        }
+        return funcSecond
+    }
+    return funcFirst
+}
+
+arrayg = (arg1) => {
+    var val = []
+    var funcFirst = function doMath(param){
+        if(param === undefined){
+            return val
+        }
+        val.push(param)
+        return funcFirst
+    }
+    return funcFirst(arg1)
+}
+
+continuize = (func1) => {
+    var funcFirst = function doMath(func2, param){
+        console.log("test")
+        return func2(func1(param))
+    }
+    return funcFirst
 }
